@@ -8,18 +8,18 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var showingAlert = false
+
     var body: some View {
-        ZStack {
-            VStack(spacing: 0) {
-                Color.red
-                Color.blue
-            }
-            Text("Hello, World!")
-                .foregroundColor(.secondary)
-                .padding(50)
-                .background(.ultraThinMaterial)
+        Button("Show Alert") {
+          showingAlert = true
         }
-        .ignoresSafeArea()
+        .alert("Important message", isPresented: $showingAlert) {
+          Button("Delete", role: .destructive) {print("Delete") }
+          Button("Cancel", role: .cancel) {print("Cancel")}
+        } message: {
+            Text("Please select a button.")
+        }
     }
 }
 
