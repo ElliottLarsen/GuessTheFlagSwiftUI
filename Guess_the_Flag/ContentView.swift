@@ -18,14 +18,16 @@ struct ContentView: View {
         
         ZStack {
             
-            Color.blue
+            LinearGradient(gradient: Gradient(colors: [.blue, .black]), startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea()
             
             VStack(spacing: 30) {
                 VStack {
                     Text("Tap the flag of")
+                        .font(.subheadline.weight(.heavy))
                         .foregroundColor(.white)
                     Text(countries[correctAnswer])
+                        .font(.largeTitle.weight(.semibold))
                         .foregroundColor(.white)
                 }
                 ForEach(0..<3) {number in
@@ -34,10 +36,11 @@ struct ContentView: View {
                     } label: {
                         Image(countries[number])
                             .renderingMode(.original)
+                            .clipShape(Capsule())
+                            .shadow(radius: 5)
                     }
                 
                 }
-
             }
             .alert(scoreTitle, isPresented:  $showingScore) {
                 Button("Continue", action: askQuestion)
